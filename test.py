@@ -5,7 +5,12 @@ from datasets import load_dataset
 from tqdm.auto import tqdm
 
 """--SETTINGS--"""
-device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+# The model is too heavy for my graphics card.
+# By the way, on the cpu and RAM, the model takes 13go.
+# For it to work on my pc I need to set it to batch_size=1 and device is on cpu.
+
+# device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+device = torch.device("cpu")
 
 checkpoint = "facebook/mbart-large-cc25"
 tokenizer = MBartTokenizer.from_pretrained(checkpoint, return_tensors="pt")
@@ -19,7 +24,7 @@ print("The model and the tokenizer are initialized.")
 train_size = 0.8
 seed = 42
 max_length = 32
-batch_size = 4
+batch_size = 1
 
 # As a test to make sure I'm doing it right, 
 # I'm using a modified database of the real Latin Reconstruction database of AB Antiquo.
@@ -113,6 +118,7 @@ for epoch in range(num_train_epochs):
     for batch in train_dataloader:
         batch = {k: v.to(device) for k, v in batch.items()}
         outputs = model(**batch)
+        # Beware of the memory error!
         loss = outputs.loss
         loss.backward()
 
