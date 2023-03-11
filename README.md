@@ -1,5 +1,5 @@
 # mBART fine-tuned for proto-Latin reconstruction
-Purpose: to fine-tune the multilingual model for the reconstruction of Proto-Latin from descending Romance languages.
+Purpose: to fine-tune a multilingual model for the reconstruction of Proto-Latin from descending Romance languages.
 
 *The database used is from [Shauli-Ravfogel](https://github.com/shauli-ravfogel/Latin-Reconstruction-NAACL).*
 
