@@ -3,6 +3,19 @@ Purpose: to fine-tune the multilingual model for the reconstruction of Proto-Lat
 
 *The database used is from [Shauli-Ravfogel](https://github.com/shauli-ravfogel/Latin-Reconstruction-NAACL).*
 
+## How it works?
+
+- **Initialization**
+  - Initialize the model and its tokenizer on the desired device (cpu/gpu).
+- **Data processing**
+  - Loads the database in a format understandable to the Transformers library.
+  - Split into three sets: train, validation and test. (But one and the same object at the end of the separation.)
+  - Tokenize all the words contained in the preprocessed database, and put it in a format understandable to PyTorch.
+  - Load individually the sets (training, test, validation) by sampling them in batches. (Checks that all the processing on the data is properly done.)
+- **Training**
+  - Initialize the training parameters : an optimizer, a number of epochs, a scheduler. 
+  - Start the training and evaluation loop
+
 ## Running Locally
 
 1. Cloning the repository on the local machine.
